@@ -29,6 +29,7 @@ class Wiki(object):
 
 class User(object):
 
+   # Initialize with userid
    def __init__(self, userid):
       response = requests.get("http://www.ifixit.com/api/2.0/users/%s" \
             % (userid))

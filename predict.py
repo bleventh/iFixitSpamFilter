@@ -19,8 +19,8 @@ def badgeCount(user):
 
 for userID in userIDs:
    user = User(userID)
+   #import functions for gathering here
    reputationFeature(user)
    badgeCount(user)
-   #import functions for gathering here
 
    features.write('\n')

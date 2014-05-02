@@ -1,4 +1,3 @@
-import pyfixit
 import requests
 
 # this file will print data into a text file

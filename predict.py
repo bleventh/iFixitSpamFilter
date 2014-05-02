@@ -1,26 +1,12 @@
-from dataAcquisition import User
-from dataAcquisition import Wiki
+from sklearn import svm
 
-userIDs = open('UserIDs.txt', 'r')
-features = open('feature.txt', 'w')
+X = []
+y = [0, 1, 1, 1]
+features = open('feature.txt', 'r')
 
+for line in features:
+   X.append(line.split())
 
-def reputationFeature(user):
-   if user.reputation > 1:
-      features.write('0 ')
-   else:
-      features.write('1 ')
+clf = svm.SVC()
+clf.fit(X, y)
 
-def badgeCount(user):
-   if user.total_badges:
-      features.write('0 ')
-   else:
-      features.write('1 ')
-
-for userID in userIDs:
-   user = User(userID)
-   #import functions for gathering here
-   reputationFeature(user)
-   badgeCount(user)
-
-   features.write('\n')

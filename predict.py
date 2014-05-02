@@ -1,13 +1,10 @@
 from dataAcquisition import User
 from dataAcquisition import Wiki
 
+users = open('UserIDs.txt', 'r')
 
-aUser = User(778022)
+for line in users:
+   user = User(line)
+   print user.about_rendered
 
-if aUser.reputation > 1:
-   print "good"
-else:
-   print "bad"
-
-print aUser.about_rendered
-
+   #import functions for gathering here

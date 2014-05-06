@@ -18,12 +18,27 @@ def badgeCount(user):
    else:
       features.write('1 ')
 
+def wordCount(user):
+   words = len(user.about_rendered.split()) 
+   if words > 30 and words < 500:
+      features.write('0 ')
+   else:
+      features.write('1 ')
+
+def summary(user):
+   if user.summary:
+      features.write('0 ')
+   else:
+      features.write('1 ')
+
 for userID in userIDs:
    user = User(userID)
 
    #import functions for gathering here
    reputationFeature(user)
    badgeCount(user)
+   wordCount(user)
+   summary(user)
 
    features.write('\n')
 

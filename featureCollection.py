@@ -61,8 +61,6 @@ def aboutWordCount(user):
    else:
       features.write('1 ')
 
-   print( "about: %s" % (about_word_count))
-
 def summaryWordCount(user):
    summary = user.summary
    summary_word_count = wordCount(user.summary)
@@ -71,8 +69,6 @@ def summaryWordCount(user):
       features.write('0 ')
    else:
       features.write('1 ')
-
-   print( "summary: %s" % (summary_word_count))
 
 def numTeams (user):
    teams = user.teams

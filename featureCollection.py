@@ -3,9 +3,20 @@ from dataAcquisition import Wiki
 from bs4 import BeautifulSoup as bs
 import re
 
+ABOUT_MIN_WORD_COUNT = 20
+ABOUT_MAX_WORD_COUNT = 500
+SUMMARY_MIN_WORD_COUNT = 10
+SUMMARY_MAX_WORD_COUNT = 200
+
 userIDs = open('UserIDs.txt', 'r')
 features = open('feature.txt', 'w')
 
+# repuation = 0
+# total_badges = 0
+# about_word_count = 0
+# summary_word_count = 0
+# summary = ""
+# teams = 0
 
 def noniFixitDomains(user):
    html = bs(user.about_rendered)
@@ -23,26 +34,49 @@ def noniFixitDomains(user):
       features.write('0 ')
 
 def reputationFeature(user):
-   if user.reputation > 1:
+   reputation = user.reputation
+   if reputation > 1:
       features.write('0 ')
    else:
       features.write('1 ')
 
 def badgeCount(user):
-   if user.total_badges:
+   total_badges = user.total_badges
+   if total_badges:
       features.write('0 ')
    else:
       features.write('1 ')
 
-def wordCount(user):
-   words = len(user.about_rendered.split()) 
-   if words > 30 and words < 500:
+def wordCount(text):
+   if text:
+      return len(text.split())
+   else: 
+      return 0 
+
+def aboutWordCount(user):
+   about_word_count = wordCount(user.about_raw)
+
+   if about_word_count > ABOUT_MIN_WORD_COUNT and about_word_count < ABOUT_MAX_WORD_COUNT:
       features.write('0 ')
    else:
       features.write('1 ')
 
-def summary(user):
-   if user.summary:
+   print( "about: %s" % (about_word_count))
+
+def summaryWordCount(user):
+   summary = user.summary
+   summary_word_count = wordCount(user.summary)
+
+   if summary_word_count > SUMMARY_MIN_WORD_COUNT and summary_word_count < SUMMARY_MAX_WORD_COUNT:
+      features.write('0 ')
+   else:
+      features.write('1 ')
+
+   print( "summary: %s" % (summary_word_count))
+
+def numTeams (user):
+   teams = user.teams
+   if teams:
       features.write('0 ')
    else:
       features.write('1 ')
@@ -54,8 +88,9 @@ for userID in userIDs:
    noniFixitDomains(user)
    reputationFeature(user)
    badgeCount(user)
-   wordCount(user)
-   summary(user)
+   aboutWordCount(user)
+   summaryWordCount(user)
+   numTeams(user)
 
    features.write('\n')
 

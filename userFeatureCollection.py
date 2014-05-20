@@ -1,6 +1,6 @@
 from dataAcquisition import User
-from dataAcquisition import Wiki
 import Utils
+import time
 
 ABOUT_MIN_WORD_COUNT = 20
 ABOUT_MAX_WORD_COUNT = 500
@@ -51,9 +51,14 @@ def numTeams (user):
 
 for userID in userIDs:
    user = User(userID)
+   # add this for api rate-limiting purposes
+   time.sleep(0.1)
 
    #import functions for gathering here
-   Utils.noniFixitDomains(user.about_rendered, features)
+   if user.about_rendered:
+      Utils.noniFixitDomains(user.about_rendered, features)
+   else:
+      features.write('1 ')
    reputationFeature(user)
    badgeCount(user)
    aboutWordCount(user)

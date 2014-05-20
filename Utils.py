@@ -14,10 +14,10 @@ def noniFixitDomains(html, featureFile):
 
    for a in html.find_all('a', href=True):
       if len(re.findall(r"ifixit", a['href'])):
-         ifixitUrlCount = ifixitUrlCount + 1
-      urlCount = urlCount + 1
+         ifixitUrlCount = ifixitUrlCount + 1.0
+      urlCount = urlCount + 1.0
 
    if urlCount:
       featureFile.write('%s ' % (1.0 - (ifixitUrlCount/urlCount)))
    else:
-      featureFile.write('0 ')
+      featureFile.write('0.0 ')

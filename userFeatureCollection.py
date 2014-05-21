@@ -1,14 +1,18 @@
 from dataAcquisition import User
 import Utils
 import time
+import sys
 
 ABOUT_MIN_WORD_COUNT = 20
 ABOUT_MAX_WORD_COUNT = 500
 SUMMARY_MIN_WORD_COUNT = 10
 SUMMARY_MAX_WORD_COUNT = 200
 
-userIDs = open('UserIDs.txt', 'r')
-features = open('feature.txt', 'w')
+if len(sys.argv) != 3:
+   sys.exit('2 arguments required: {userIDListFile} {outputFile}')
+
+userIDs = open(sys.argv[1], 'r')
+features = open(sys.argv[2], 'w')
 
 def reputationFeature(user):
    reputation = user.reputation

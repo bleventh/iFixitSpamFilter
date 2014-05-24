@@ -28,7 +28,6 @@ def badgeCount(user):
    else:
       features.write('1 ')
 
-
 def aboutWordCount(user):
    about_word_count = Utils.wordCount(user.about_raw)
 

@@ -50,4 +50,17 @@ class User(object):
       self.about_raw = attributes['about_raw']
       self.about_rendered = attributes['about_rendered']
 
+class Comment(object):
+
+   def __init__(self, commentId):
+      reponse = requests.get("http://www.ifixit.com/api/2.0/comments/%s" \
+         % commentId)
+
+      attributes = response.json()
+
+      self.author = attributes['author']
+      self.text_raw = attributes['text_raw']
+      self.text_rendered = attributes['text_rendered']
+      self.rating = attributes['rating']
+      self.replies = attributes['replies']
 

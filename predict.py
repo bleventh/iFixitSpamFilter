@@ -17,7 +17,7 @@ for line in features:
 for line in labels:
    y.append(line.split()[0])
 
-clf = svm.SVC()
+#clf = svm.SVC(kernel='linear')
 clf.fit(X, y)
 
 testFeatures = open(sys.argv[3], 'r')
@@ -43,3 +43,5 @@ for line in testLabels:
    total += 1.0
 
 print "accuracy: %s" % (accuracyCount/total)
+
+#print clf.coef_
